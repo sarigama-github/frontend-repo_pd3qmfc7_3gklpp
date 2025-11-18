@@ -1,73 +1,129 @@
-function App() {
+import React, { useMemo, useState } from 'react'
+import Header from './components/Header'
+import Hero from './components/Hero'
+import PromoStrip from './components/PromoStrip'
+import Categories from './components/Categories'
+import Popular from './components/Popular'
+import Footer from './components/Footer'
+
+const dict = {
+  en: {
+    nav: { home: 'Home', categories: 'Categories', popular: 'Popular', contact: 'Contact' },
+    search: { placeholder: 'Search gift cards, brands, or categories...' },
+    aria: { language: 'Language', region: 'Region', theme: 'Theme' },
+    hero: {
+      badge: 'Digital Gift Cards',
+      title: 'Top-up your favorite services in seconds',
+      subtitle: 'Shop cards for streaming, gaming, apps, and more. Instant codes delivered worldwide.',
+      ctaPrimary: 'Browse Categories',
+      ctaSecondary: 'Top Trending',
+    },
+    categories: {
+      title: 'Featured Categories',
+      apple: 'Apple & iTunes',
+      gaming: 'Gaming Cards',
+      streaming: 'Streaming Services',
+      payments: 'Payment & Wallets',
+      global: 'International',
+      music: 'Music',
+      mobile: 'Mobile Recharge',
+      youtube: 'YouTube',
+      shopping: 'Shopping',
+    },
+    popular: { title: 'Popular & Trending', trending: 'Trending' },
+    common: { viewAll: 'View all', buyNow: 'Buy now' },
+    promos: {
+      fastDelivery: 'Fast digital delivery',
+      fastDeliveryDesc: 'Receive your code instantly after purchase',
+      instantEmail: 'Instant email receipt',
+      instantEmailDesc: 'We’ll send a copy to your inbox right away',
+      bestPrices: 'Best prices guaranteed',
+      bestPricesDesc: 'Competitive rates across all regions',
+    },
+    footer: {
+      tagline: 'Your trusted marketplace for digital gift cards across the globe.',
+      quickLinks: 'Quick links',
+      terms: 'Terms of Use',
+      privacy: 'Privacy Policy',
+      contact: 'Contact Us',
+      faq: 'FAQ',
+      payments: 'Payment methods',
+      follow: 'Follow us',
+      support: 'Support',
+      secure: 'Secure checkout',
+      helpCenter: 'Help Center',
+      rights: 'All rights reserved.',
+      countryNotice: 'Serving Kuwait, Qatar, Saudi Arabia and more.'
+    }
+  },
+  ar: {
+    nav: { home: 'الرئيسية', categories: 'الفئات', popular: 'الأكثر رواجًا', contact: 'تواصل' },
+    search: { placeholder: 'ابحث عن بطاقات الهدايا أو العلامات التجارية...' },
+    aria: { language: 'اللغة', region: 'المنطقة', theme: 'المظهر' },
+    hero: {
+      badge: 'بطاقات رقمية',
+      title: 'اشحن خدماتك المفضلة خلال ثوانٍ',
+      subtitle: 'تسوق لبطاقات البث والألعاب والتطبيقات والمزيد. أكواد فورية تصل للعالم كله.',
+      ctaPrimary: 'استعرض الفئات',
+      ctaSecondary: 'الأكثر رواجًا',
+    },
+    categories: {
+      title: 'فئات مميزة',
+      apple: 'آبل وآيتونز',
+      gaming: 'بطاقات الألعاب',
+      streaming: 'خدمات البث',
+      payments: 'الدفع والمحافظ',
+      global: 'دولي',
+      music: 'الموسيقى',
+      mobile: 'شحن الجوال',
+      youtube: 'يوتيوب',
+      shopping: 'تسوق',
+    },
+    popular: { title: 'الأشهر والأكثر طلبًا', trending: 'رائج' },
+    common: { viewAll: 'عرض الكل', buyNow: 'اشتر الآن' },
+    promos: {
+      fastDelivery: 'تسليم رقمي سريع',
+      fastDeliveryDesc: 'استلم الكود فورًا بعد الدفع',
+      instantEmail: 'إيصال عبر البريد فورًا',
+      instantEmailDesc: 'نرسل نسخة مباشرة إلى بريدك',
+      bestPrices: 'أفضل الأسعار',
+      bestPricesDesc: 'أسعار منافسة لكل المناطق',
+    },
+    footer: {
+      tagline: 'منصة موثوقة لشراء بطاقات الهدايا الرقمية حول العالم.',
+      quickLinks: 'روابط سريعة',
+      terms: 'شروط الاستخدام',
+      privacy: 'سياسة الخصوصية',
+      contact: 'اتصل بنا',
+      faq: 'الأسئلة الشائعة',
+      payments: 'طرق الدفع',
+      follow: 'تابعنا',
+      support: 'الدعم',
+      secure: 'دفع آمن',
+      helpCenter: 'مركز المساعدة',
+      rights: 'جميع الحقوق محفوظة.',
+      countryNotice: 'نخدم الكويت وقطر والسعودية وأكثر.'
+    }
+  }
+}
+
+export default function App() {
+  const [lang, setLang] = useState('en')
+  const [region, setRegion] = useState('KW')
+
+  const t = useMemo(() => {
+    const d = dict[lang]
+    return (key) => key.split('.').reduce((o, k) => (o ? o[k] : undefined), d)
+  }, [lang])
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
-
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
-
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
-          </div>
-
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white dark:bg-slate-900">
+      <Header lang={lang} setLang={setLang} region={region} setRegion={setRegion} t={t} />
+      <Hero t={t} />
+      <PromoStrip t={t} />
+      <Categories t={t} />
+      <Popular t={t} />
+      <Footer t={t} />
     </div>
   )
 }
-
-export default App
