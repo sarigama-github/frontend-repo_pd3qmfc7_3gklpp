@@ -9,8 +9,8 @@ import Footer from './components/Footer'
 const dict = {
   en: {
     nav: { home: 'Home', categories: 'Categories', popular: 'Popular', contact: 'Contact' },
-    search: { placeholder: 'Search gift cards, brands, or categories...' },
-    aria: { language: 'Language', region: 'Region', theme: 'Theme' },
+    search: { placeholder: 'Search gift cards, brands, or categories...', categoryAll: 'All categories' },
+    aria: { language: 'Language', region: 'Region', theme: 'Theme', category: 'Category' },
     hero: {
       badge: 'Digital Gift Cards',
       title: 'Top-up your favorite services in seconds',
@@ -57,9 +57,9 @@ const dict = {
     }
   },
   ar: {
-    nav: { home: 'الرئيسية', categories: 'الفئات', popular: 'الأكثر رواجًا', contact: 'تواصل' },
-    search: { placeholder: 'ابحث عن بطاقات الهدايا أو العلامات التجارية...' },
-    aria: { language: 'اللغة', region: 'المنطقة', theme: 'المظهر' },
+    nav: { home: 'الرئيسية', categories: 'المتجر', popular: 'العروض', contact: 'المساعدة' },
+    search: { placeholder: 'ابحث عن بطاقات الهدايا أو العلامات التجارية...', categoryAll: 'كل الفئات' },
+    aria: { language: 'اللغة', region: 'المنطقة', theme: 'المظهر', category: 'الفئة' },
     hero: {
       badge: 'بطاقات رقمية',
       title: 'اشحن خدماتك المفضلة خلال ثوانٍ',
@@ -108,8 +108,8 @@ const dict = {
 }
 
 export default function App() {
-  const [lang, setLang] = useState('en')
-  const [region, setRegion] = useState('KW')
+  const [lang, setLang] = useState('ar')
+  const [region, setRegion] = useState('SA')
 
   const t = useMemo(() => {
     const d = dict[lang]
